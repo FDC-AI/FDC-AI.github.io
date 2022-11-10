@@ -9,16 +9,44 @@
   <body>
     <input id="token" type="text" placeholder="token" />
     <button id="tokenButton" onclick="setToken()">set</button>
+    <div id="qrcode"></div>
   </body>
-  <script>
+  <style>
+    #qrcode {
+      margin: auto;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/qrcode.min.js"></script>
+  <script type="text/javascript">
+    const baseUrl = "https://oat-api.fdc.ai";
     let token = "";
 
+    const w =
+      (screen.width <= screen.height ? screen.width : screen.height) * 0.75;
+    const qrcode = new QRCode(document.getElementById("qrcode"), {
+      text: "",
+      width: w,
+      height: w,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+
     function getQrCode() {
-      fetch("https://ecd9939c-8189-4c05-9203-76cff1b4349a.mock.pstmn.io")
+      fetch(`${baseUrl}getNewOtp`, { headers: { token } })
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
+        .then((responseJson) => {
+          if (responseJson.status === "success" && responseJson.data) {
+            qrcode.makeCode(`${baseUrl}verifyOtp?otp=${responseJson.data}`);
+          }
+        })
+        .catch((e) => console.log(e));
     }
 
     function setToken() {
