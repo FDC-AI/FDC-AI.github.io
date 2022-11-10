@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FDC x Meet Taipei Airdrop</title>
+  </head>
+  <body>
+    <input id="token" type="text" placeholder="token" />
+    <button id="tokenButton" onclick="setToken()">set</button>
+  </body>
+  <script>
+    let token = "";
+
+    function getQrCode() {
+      fetch("https://ecd9939c-8189-4c05-9203-76cff1b4349a.mock.pstmn.io")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+
+    function setToken() {
+      let _token = window.document.getElementById("token").value;
+      if (_token) {
+        token = _token;
+        window.document.getElementById("token").style.display = "none";
+        window.document.getElementById("tokenButton").style.display = "none";
+        const id = setInterval(getQrCode, 1000);
+      }
+    }
+  </script>
+</html>
