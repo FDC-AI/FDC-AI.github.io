@@ -4,21 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>FDC x Meet Taipei Airdrop</title>
   </head>
   <body>
-    <input id="token" type="text" placeholder="token" />
-    <button id="tokenButton" onclick="setToken()">set</button>
+    <div class="flex w-full justify-center text-5xl mt-10">
+      掃QR Code填問卷，AirPods Pro 2帶回家！
+    </div>
+    <input
+      id="token"
+      type="text"
+      placeholder="token"
+      class="border-2 border-black"
+    />
+    <button
+      id="tokenButton"
+      onclick="setToken()"
+      class="border-2 border-black px-2 rounded-md"
+    >
+      set
+    </button>
     <div id="qrcode"></div>
   </body>
   <style>
     #qrcode {
-      margin: auto;
+      margin-top: 5vh;
       width: 100vw;
       height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: start;
     }
   </style>
   <script src="./js/jquery.min.js"></script>
@@ -28,7 +43,7 @@
     let token = "";
 
     const w =
-      (screen.width <= screen.height ? screen.width : screen.height) * 0.75;
+      (screen.width <= screen.height ? screen.width : screen.height) * 0.8;
     const qrcode = new QRCode(document.getElementById("qrcode"), {
       text: "",
       width: w,
