@@ -19,10 +19,6 @@
       {
         "type": "js",
         "key": "mytonwallet"
-      },
-      {
-        "type": "sse",
-        "url": "https://tonconnectbridge.mytonwallet.org/bridge/"
       }
     ]
   }
